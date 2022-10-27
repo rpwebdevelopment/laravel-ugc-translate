@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace RpWebDevelopment\LaravelUgcTranslate\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class LaravelUgcTranslateCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'laravel-ugc-translate';
 
     public $description = 'My command';
 
