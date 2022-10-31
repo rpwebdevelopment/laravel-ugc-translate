@@ -8,10 +8,12 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('laravel_ugc_translate_table', function (Blueprint $table) {
+        Schema::create('ugc_translations', function (Blueprint $table) {
             $table->id();
 
-            // add fields
+            $table->morphs('linkable');
+            $table->json('content');
+            $table->string('field');
 
             $table->timestamps();
         });
