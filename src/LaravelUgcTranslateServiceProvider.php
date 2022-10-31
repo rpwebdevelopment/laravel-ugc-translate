@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace RpWebDevelopment\LaravelUgcTranslate;
 
 use Spatie\LaravelPackageTools\Package;
@@ -10,16 +12,10 @@ class LaravelUgcTranslateServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
-        /*
-         * This class is a Package Service Provider
-         *
-         * More info: https://github.com/spatie/laravel-package-tools
-         */
         $package
-            ->name('laravel-ugc-translate')
+            ->name('ugc-translate')
             ->hasConfigFile()
-            ->hasViews()
-            ->hasMigration('create_laravel-ugc-translate_table')
+            ->hasMigration('create_ugc_translate_table')
             ->hasCommand(LaravelUgcTranslateCommand::class);
     }
 }
