@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace RpWebDevelopment\LaravelUgcTranslate\Jobs;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use RpWebDevelopment\LaravelUgcTranslate\Models\AbstractUgcModel;
 
 abstract class AbstractUgcJob
 {
@@ -17,7 +17,7 @@ abstract class AbstractUgcJob
     use Queueable;
     use SerializesModels;
 
-    public function __construct(protected AbstractUgcModel $model)
+    public function __construct(protected Model $model)
     {
         //
     }

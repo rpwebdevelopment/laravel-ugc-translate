@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace RpWebDevelopment\LaravelUgcTranslate\Observers;
 
+use Illuminate\Database\Eloquent\Model;
 use RpWebDevelopment\LaravelUgcTranslate\Jobs\Delete;
-use RpWebDevelopment\LaravelUgcTranslate\Models\AbstractUgcModel;
 use RpWebDevelopment\LaravelUgcTranslate\Jobs\Create;
 use RpWebDevelopment\LaravelUgcTranslate\Jobs\Update;
 
@@ -14,10 +14,10 @@ class UgcModelObserver
     /**
      * Handle the AbstractUgcModel "created" event.
      *
-     * @param AbstractUgcModel $model
+     * @param Model $model
      * @return void
      */
-    public function created(AbstractUgcModel $model)
+    public function created(Model $model)
     {
         Create::dispatch($model);
     }
@@ -25,10 +25,10 @@ class UgcModelObserver
     /**
      * Handle the User "updated" event.
      *
-     * @param AbstractUgcModel $model
+     * @param Model $model
      * @return void
      */
-    public function updated(AbstractUgcModel $model)
+    public function updated(Model $model)
     {
         Update::dispatch($model);
     }
@@ -36,10 +36,10 @@ class UgcModelObserver
     /**
      * Handle the User "saved" event.
      *
-     * @param AbstractUgcModel $model
+     * @param Model $model
      * @return void
      */
-    public function saved(AbstractUgcModel $model)
+    public function saved(Model $model)
     {
         Update::dispatch($model);
     }
@@ -47,10 +47,10 @@ class UgcModelObserver
     /**
      * Handle the User "deleted" event.
      *
-     * @param AbstractUgcModel $model
+     * @param Model $model
      * @return void
      */
-    public function deleted(AbstractUgcModel $model)
+    public function deleted(Model $model)
     {
         Delete::dispatch($model);
     }
@@ -58,10 +58,10 @@ class UgcModelObserver
     /**
      * Handle the User "forceDeleted" event.
      *
-     * @param AbstractUgcModel $model
+     * @param Model $model
      * @return void
      */
-    public function forceDeleted(AbstractUgcModel $model)
+    public function forceDeleted(Model $model)
     {
         Delete::dispatch($model);
     }
