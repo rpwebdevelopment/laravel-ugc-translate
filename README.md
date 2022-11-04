@@ -20,6 +20,8 @@ php artisan migrate
 php artisan vendor:publish --tag="ugc-translate-config"
 ```
 
+## Configuration
+
 This package implements the DeepL API for machine translation, as such you will need to provide an appropriate API key in your `.env` file:
 ```php
 DEEPL_AUTH_TOKEN=YOUR_VALID_DEEPL_API_KEY
@@ -30,43 +32,53 @@ If you do not wish every record update/creation to trigger automatic translation
 DEEPL_AUTO_DISABLED=true
 ```
 
-## Usage
-
-The package provides a new abstract model that can be extended in order to apply automatic translations:
-
+Youc can update the config file `ugc-translate.php` in order to set any languages needed for translation:
 ```php
-<?php
-
-namespace App\Models;
-
-use RpWebDevelopment\LaravelUgcTranslate\Models\AbstractUgcModel;
-
-class Posts extends AbstractUgcModel
-{
-    //
-}
-```
-
-In order to define translatable fields, and languages required for translation our models will now require two new properties defining the DB fields to be translated and the languages required; `$ugcTranslatable` & `$ugcLanguages`:
-
-```php
-<?php
-
-namespace App\Models;
-
-use RpWebDevelopment\LaravelUgcTranslate\Models\AbstractUgcModel;
-
-class Posts extends AbstractUgcModel
-{
-    public array $ugcTranslatable = [
-        'title',
-        'body',
-    ];
-
-    public array $ugcLanguages = [
+    'translation-languages' => [
         'en-GB',
         'fr',
         'it',
+        'de',
+    ],
+```
+
+## Usage
+
+The package provides a new trait that can be used in order to apply automatic translations:
+
+```php
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use RpWebDevelopment\LaravelUgcTranslate\Traits\HasTranslatable;
+
+class Posts extends Model
+{
+    use HasTranslatable;
+    
+    protected $guarded = [];
+}
+```
+
+In order to define translatable fields, and languages required for translation our models will now require a new property `$ugcTranslatable` defining the DB fields to be translated:
+
+```php
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use RpWebDevelopment\LaravelUgcTranslate\Traits\HasTranslatable;
+
+class Posts extends Model
+{
+    use HasTranslatable;
+ 
+    public array $ugcTranslatable = [
+        'title',
+        'body',
     ];
 
     protected $guarded = [];
@@ -96,15 +108,6 @@ echo $post->title;
 app()->setLocale('fr');
 echo $post->title;
 // outputs "Il s'agit d'un titre"
-```
-
-### Note
-If your model leverages the Laravel `boot` method, and you require auto updating, you will need to ensure that you either, call `parent::boot()` or `self::observe(UgcModelObserver::class)`.
-
-## Testing
-
-```bash
-composer test
 ```
 
 ## Changelog
