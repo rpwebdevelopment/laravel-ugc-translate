@@ -136,6 +136,46 @@ echo $post->localeField('title', 'fr');
 // outputs "Il s'agit d'un titre"
 ```
 
+Sometimes you may not need all the default languages for every model, in order to override the default languages on 
+a model you can simply add the `getUgcLanguagesAttribute` method to the model returning an array of locale codes:
+```php
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use RpWebDevelopment\LaravelUgcTranslate\Traits\HasTranslatable;
+
+class Posts extends Model
+{
+    use HasTranslatable;
+    
+    protected $guarded = [];
+    
+    public function getUgcLanguagesAttribute(): array
+    {
+        return ['en_GB', 'it'];
+    }
+}
+```
+
+If you use Livewire in your application there is a custom modal available for editing & locking specific translations,
+you can publish the modal component and view by runningg the following command:
+```php
+php artisan vendor:publish --tag="ugc-translate-livewire"
+```
+
+Once published you can add the modal into your project with the following tag:
+```php
+<livewire:ugc.modal :model="$model" field="title" />
+```
+
+This will add a button to your blade template that will open the following modal:
+
+![step 1](./.assets/modal.png)
+
+Locking translations will prevent them from being automatically updated.
+
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.

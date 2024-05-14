@@ -74,6 +74,6 @@ trait HasTranslatable
             return parent::getAttribute($field);
         }
 
-        return $this->ugcField($field);
+        return $this->attributes[$field];
     }
 }

@@ -39,6 +39,41 @@ class Locale
         'zh' => 'zh',
     ];
 
+    public const LOCALE_LANGUAGES = [
+        'bg' => 'Bulgarian',
+        'cs' => 'Czech',
+        'da' => 'Danish',
+        'de' => 'German',
+        'el' => 'Greek',
+        'en' => 'English',
+        'en-GB' => 'English (UK)',
+        'en-US' => 'English (US)',
+        'es' => 'Spanish',
+        'et' => 'Estonian',
+        'fi' => 'Finnish',
+        'fr' => 'French',
+        'hu' => 'Hungarian',
+        'id' => 'Indonesian',
+        'it' => 'Italian',
+        'ja' => 'Japanese',
+        'lt' => 'Lithuanian',
+        'lv' => 'Latvian',
+        'nl' => 'Dutch',
+        'nl_BE' => 'Flemish',
+        'pl' => 'Polish',
+        'pt' => 'Portuguese',
+        'pt-BR' => 'Portuguese (Brazil)',
+        'pt-PT' => 'Portuguese (Portugal)',
+        'ro' => 'Romanian',
+        'ru' => 'Russian',
+        'sk' => 'Slovak',
+        'sl' => 'Slovenian',
+        'sv' => 'Swedish',
+        'tr' => 'Turkish',
+        'uk' => 'Ukrainian',
+        'zh' => 'Chinese',
+    ];
+
     public static function getLocaleString(?string $locale = null): string
     {
         $locale = $locale ?? app()->getLocale();
