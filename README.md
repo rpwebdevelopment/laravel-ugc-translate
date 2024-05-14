@@ -32,7 +32,17 @@ If you do not wish every record update/creation to trigger automatic translation
 DEEPL_AUTO_DISABLED=true
 ```
 
-Youc can update the config file `ugc-translate.php` in order to set any languages needed for translation:
+Sometimes you may only want translations enabled on a model if certain conditions are met, for example if a flag is 
+set against the model instance, in order to achieve this you can add the method `getHasTranslationsAttribute` to the 
+model returning a boolean value, i.e.
+```php
+    public function getHasTranslationsAttribute(): bool
+    {
+        // your code here - returning bool
+    }
+```
+
+You can update the config file `ugc-translate.php` in order to set any languages needed for translation:
 ```php
     'translation-languages' => [
         'en-GB',
@@ -99,7 +109,7 @@ $post = App\Models\Post::find(1);
 
 app()->setLocale('en_GB');
 echo $post->title;
-// ouputs "This is a title"
+// outputs "This is a title"
 
 app()->setLocale('it');
 echo $post->title;
@@ -107,6 +117,22 @@ echo $post->title;
 
 app()->setLocale('fr');
 echo $post->title;
+// outputs "Il s'agit d'un titre"
+```
+
+Sometimes you may wish to output a specific language value without switching the application locale,
+this can be achieved using the following method:
+```php
+$post = App\Models\Post::find(1);
+
+app()->setLocale('en_GB');
+echo $post->title;
+// outputs "This is a title"
+
+echo $post->localeField('title', 'it');
+// outputs "Questo è un titolo"
+
+echo $post->localeField('title', 'fr');
 // outputs "Il s'agit d'un titre"
 ```
 

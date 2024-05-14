@@ -19,7 +19,9 @@ class UgcModelObserver
      */
     public function created(Model $model)
     {
-        Create::dispatch($model);
+        if ($model->hasTranslations) {
+            Create::dispatch($model);
+        }
     }
 
     /**
@@ -30,7 +32,9 @@ class UgcModelObserver
      */
     public function updated(Model $model)
     {
-        Update::dispatch($model);
+        if ($model->hasTranslations) {
+            Update::dispatch($model);
+        }
     }
 
     /**
@@ -41,7 +45,9 @@ class UgcModelObserver
      */
     public function saved(Model $model)
     {
-        Update::dispatch($model);
+        if ($model->hasTranslations) {
+            Update::dispatch($model);
+        }
     }
 
     /**

@@ -13,6 +13,7 @@ use stdClass;
  * RpWebDevelopment\LaravelUgcTranslate\Models\UgcTranslation
  *
  * @property int $id
+ * @property string $locale
  * @property string $linkable_type
  * @property int $linkable_id
  * @property string $content
@@ -20,17 +21,31 @@ use stdClass;
  */
 class UgcTranslation extends Model
 {
+    public string $locale;
     public $guarded = [];
+
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+
+        $this->locale = Locale::getLocaleString();
+    }
 
     public function linkable(): MorphTo
     {
         return $this->morphTo();
     }
 
+    public function forLocale(string $locale): self
+    {
+        $this->locale = $locale;
+
+        return $this;
+    }
+
     public function getContentAttribute(): mixed
     {
-        $locale = Locale::getLocaleString();
-        return $this->getContentClass()->{$locale};
+        return $this->getContentClass()->{$this->locale};
     }
 
     private function getContentClass(): stdClass
