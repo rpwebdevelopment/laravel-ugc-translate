@@ -14,8 +14,14 @@ return new class extends Migration
             $table->morphs('linkable');
             $table->json('content');
             $table->string('field');
+            $table->boolean('locked')->default(0);
 
             $table->timestamps();
         });
+    }
+
+    public function down()
+    {
+        Schema::dropIfExists('ugc_translations');
     }
 };

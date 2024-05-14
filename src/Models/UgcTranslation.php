@@ -16,8 +16,10 @@ use stdClass;
  * @property string $locale
  * @property string $linkable_type
  * @property int $linkable_id
- * @property string $content
+ * @property array $content
+ * @property string $langContent
  * @property string $field
+ * @property bool $locked
  */
 class UgcTranslation extends Model
 {
@@ -43,7 +45,12 @@ class UgcTranslation extends Model
         return $this;
     }
 
-    public function getContentAttribute(): mixed
+    public function getContentAttribute(): array
+    {
+        return collect($this->getContentClass())->toArray();
+    }
+
+    public function getLangContentAttribute(): mixed
     {
         return $this->getContentClass()->{$this->locale};
     }

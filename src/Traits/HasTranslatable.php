@@ -11,6 +11,7 @@ use RpWebDevelopment\LaravelUgcTranslate\Observers\UgcModelObserver;
 /**
  * @property-read array $ugcTranslatable
  * @property bool $hasTranslations
+ * @property array $ugcLanguages
  */
 trait HasTranslatable
 {
@@ -26,6 +27,14 @@ trait HasTranslatable
         return $this->morphMany(UgcTranslation::class, 'linkable');
     }
 
+    public function ugcAll(string $field)
+    {
+        return $this
+            ->ugc()
+            ->where('field', $field)
+            ->first();
+    }
+
     public function localeField(string $field, string $locale = 'en-GB'): string
     {
         $content = $this
@@ -33,7 +42,7 @@ trait HasTranslatable
             ->where('field', $field)
             ->first()
             ->forLocale($locale)
-            ->content;
+            ?->langContent;
 
         return $content ?? $this->attributes[$field];
     }
@@ -44,7 +53,7 @@ trait HasTranslatable
             ->ugc()
             ->where('field', $field)
             ->first()
-            ->content;
+            ?->langContent;
 
         return $content ?? $this->attributes[$field];
     }
@@ -52,6 +61,11 @@ trait HasTranslatable
     public function getHasTranslationsAttribute(): bool
     {
         return true;
+    }
+
+    public function getUgcLanguagesAttribute(): array
+    {
+        return config('ugc-translate.translation-languages');
     }
 
     public function getAttribute($field): mixed

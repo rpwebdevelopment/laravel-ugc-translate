@@ -30,7 +30,7 @@ class UgcTranslationRepository
     private static function getTranslations(Model $model, string $field): array
     {
         $content = [];
-        foreach (config('ugc-translate.translation-languages') as $lang) {
+        foreach ($model->ugcLanguages as $lang) {
             $content[$lang] = Translate::api()->translateText(
                 $model->getAttributeValue($field),
                 null,

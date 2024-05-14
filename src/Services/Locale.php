@@ -24,6 +24,7 @@ class Locale
         'lt' => 'lt',
         'lv' => 'lv',
         'nl' => 'nl',
+        'nl_BE' => 'nl',
         'pl' => 'pl',
         'pt' => 'pt',
         'pt_BR' => 'pt-BR',
