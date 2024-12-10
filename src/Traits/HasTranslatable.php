@@ -17,7 +17,7 @@ trait HasTranslatable
 {
     public static function bootHasTranslatable()
     {
-        if (! config('ugc-translate.auto-translate-disabled')) {
+        if (!config('ugc-translate.auto-translate-disabled')) {
             static::observe(UgcModelObserver::class);
         }
     }
