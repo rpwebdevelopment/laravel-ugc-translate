@@ -32,7 +32,7 @@ class UgcTranslationRepository
         $content = [];
         foreach ($model->ugcLanguages as $lang) {
             $content[$lang] = UgcTranslate::translateText(
-                texts: $model->getAttributeValue($field),
+                text: $model->getAttributeValue($field),
                 sourceLang: null,
                 targetLang: $lang
             );
