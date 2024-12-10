@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace RpWebDevelopment\LaravelUgcTranslate\ServiceProviders;
 
 use Illuminate\Support\ServiceProvider;
-use RpWebDevelopment\LaravelUgcTranslate\Facades\UgcTranslate;
 use RpWebDevelopment\LaravelUgcTranslate\Services\Translate\GoogleTranslate;
 
 class TranslateServiceProvider extends ServiceProvider
@@ -18,6 +17,6 @@ class TranslateServiceProvider extends ServiceProvider
             GoogleTranslate::class
         );
 
-        $this->app->bind(UgcTranslate::class, fn () => new $providerService());
+        $this->app->bind('ugc-translate', fn () => new $providerService());
     }
 }

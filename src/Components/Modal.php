@@ -8,6 +8,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
 use RpWebDevelopment\LaravelUgcTranslate\Models\UgcTranslation;
+use RpWebDevelopment\LaravelUgcTranslate\Repositories\UgcTranslationRepository;
 
 class Modal extends Component
 {
@@ -18,7 +19,12 @@ class Modal extends Component
     public bool $locked;
     public Model $model;
 
-    protected $listeners = ['saveTranslations', 'openUgcModal', 'closeUgcModal'];
+    protected $listeners = [
+        'saveTranslations',
+        'generateTranslations',
+        'openUgcModal',
+        'closeUgcModal'
+    ];
 
     public function mount()
     {
@@ -35,6 +41,18 @@ class Modal extends Component
     public function updatedUgc($value, $name): void
     {
         $this->ugc[$name] = $value;
+    }
+
+    public function generateTranslations(): void
+    {
+        if ($this->locked) {
+            return;
+        }
+
+        UgcTranslationRepository::processFieldUpdate($this->model, $this->field);
+
+        $this->ugcModel = $this->model->ugcAll($this->field);
+        $this->ugc = $this->ugcModel?->content ?? [];
     }
 
     public function saveTranslations(): void
