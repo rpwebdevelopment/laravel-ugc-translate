@@ -16,13 +16,13 @@ class GoogleTranslate
     }
 
     public function translateText(
-        string $string,
+        string $text,
         ?string $sourceLang = 'en_GB',
         string $targetLang
     ): string {
         return $this->translator
             ->setSource($sourceLang)
             ->setTarget($targetLang)
-            ->translate($string) ?? '';
+            ->translate($text) ?? '';
     }
 }

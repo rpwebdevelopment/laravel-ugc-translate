@@ -7,7 +7,7 @@ namespace RpWebDevelopment\LaravelUgcTranslate\Facades;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @method static string translateText(string $texts, ?string $sourceLang, string $targetLang)
+ * @method static string translateText(string $text, ?string $sourceLang, string $targetLang)
  */
 class UgcTranslate extends Facade
 {
