@@ -1,9 +1,8 @@
 # User generated content translation package 
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/rpwebdevelopment/laravel-ugc-translate.svg?style=flat-square)](https://packagist.org/packages/rpwebdevelopment/laravel-ugc-translate)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/rpwebdevelopment/laravel-ugc-translate/run-tests?label=tests)](https://github.com/rpwebdevelopment/laravel-ugc-translate/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/rpwebdevelopment/laravel-ugc-translate/Fix%20PHP%20code%20style%20issues?label=code%20style)](https://github.com/rpwebdevelopment/laravel-ugc-translate/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/rpwebdevelopment/laravel-ugc-translate.svg?style=flat-square)](https://packagist.org/packages/rpwebdevelopment/laravel-ugc-translate)
+[![Packagist Downloads](https://img.shields.io/packagist/dt/rpwebdevelopment/laravel-ugc-translate.svg?style=flat-square)](https://packagist.org/packages/rpwebdevelopment/laravel-ugc-translate)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blueviolet.svg?style=flat-square)](https://github.com/DeepLcom/deepl-php/blob/main/LICENSE)
 
 This is a Laravel specific package designed to automate the translation of user generated content in a database driven fashion.
 
@@ -22,14 +21,17 @@ php artisan vendor:publish --tag="ugc-translate-config"
 
 ## Configuration
 
-This package implements the DeepL API for machine translation, as such you will need to provide an appropriate API key in your `.env` file:
-```php
-DEEPL_AUTH_TOKEN=YOUR_VALID_DEEPL_API_KEY
-```
+This package offers you the option of using the free-to-use, zero configuration 
+[Google Translate](https://github.com/Stichoza/google-translate-php) package from 
+[Stichoza](https://github.com/Stichoza) or the [DeepL API](https://github.com/DeepLcom/deepl-php).
+ 
+If leveraging the DeepL API you will need to add a valid `DEEPL_AUTH_TOKEN` to your `.env` file.
 
-If you do not wish every record update/creation to trigger automatic translation, you can disable the observer by adding the following to your `.env` file:
+
+If you do not wish every record update/creation to trigger automatic translation, you can disable the observer by 
+adding the following to your `.env` file:
 ```php
-DEEPL_AUTO_DISABLED=true
+UGC_AUTO_TRANSLATE_DISABLED=true
 ```
 
 Sometimes you may only want translations enabled on a model if certain conditions are met, for example if a flag is 
@@ -72,7 +74,8 @@ class Posts extends Model
 }
 ```
 
-In order to define translatable fields, and languages required for translation our models will now require a new property `$ugcTranslatable` defining the DB fields to be translated:
+In order to define translatable fields, and languages required for translation our models will now require a new 
+property `$ugcTranslatable` defining the DB fields to be translated:
 
 ```php
 <?php
@@ -95,7 +98,9 @@ class Posts extends Model
 }
 ```
 
-Unless you have disabled auto-translate, creating or updating a record within your model will cause translations to be generated and stored. The package leverages Laravel's `locale` in order to assert which language is to be returned. If we take our posts model above with the following record:
+Unless you have disabled auto-translate, creating or updating a record within your model will cause translations 
+to be generated and stored. The package leverages Laravel's `locale` in order to assert which language is to be 
+returned. If we take our posts model above with the following record:
 
 ```
 | id  | title           | body                    |
