@@ -2,7 +2,18 @@
 
 All notable changes to `laravel-ugc-translate` will be documented in this file.
 
-## [0.2.2] - 2024-12-11
+## [0.2.4] - 2024-12-11
+
+Bugfix - adding default lang content fallback
+
+### Added
+
+### Changed
+
+### Fixed
+- [[HOTFIX-CONTENT-FALLBACK]](https://github.com/rpwebdevelopment/laravel-ugc-translate/tree/hotfix-content-fallback)
+
+## [0.2.3] - 2024-12-11
 
 Added improved support for additional locale formats
 
