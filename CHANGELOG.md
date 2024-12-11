@@ -2,6 +2,17 @@
 
 All notable changes to `laravel-ugc-translate` will be documented in this file.
 
+## [0.2.5] - 2024-12-11
+
+Bugfix - fixed issue with saving updates for multiple langs
+
+### Added
+
+### Changed
+
+### Fixed
+- [[HOTFIX-FIXED-MULTI-LANG]](https://github.com/rpwebdevelopment/laravel-ugc-translate/tree/hotfix-fixed-multi-lang)
+
 ## [0.2.4] - 2024-12-11
 
 Bugfix - adding default lang content fallback
