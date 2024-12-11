@@ -52,7 +52,7 @@ class UgcTranslation extends Model
 
     public function getLangContentAttribute(): mixed
     {
-        return $this->getContentClass()->{$this->locale};
+        return $this->getContentClass()->{$this->locale} ?? null;
     }
 
     private function getContentClass(): stdClass
