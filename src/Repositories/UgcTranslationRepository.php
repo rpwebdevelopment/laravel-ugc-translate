@@ -15,16 +15,12 @@ class UgcTranslationRepository
         $content = self::getTranslations($model, $field);
         self::removeFieldTranslations($model, $field);
 
-        $record = new UgcTranslation(
-            [
-                'linkable_type' => $model::class,
-                'linkable_id' => $model->getKey(),
-                'content' => json_encode($content),
-                'field' => $field,
-            ]
-        );
-
-        $record->save();
+        UgcTranslation::query()->create([
+            'linkable_type' => $model::class,
+            'linkable_id' => $model->getKey(),
+            'content' => json_encode($content),
+            'field' => $field,
+        ]);
     }
 
     private static function getTranslations(Model $model, string $field): array
@@ -44,14 +40,16 @@ class UgcTranslationRepository
     public static function removeTranslations(Model $model): void
     {
         UgcTranslation::query()
-            ->whereMorphedTo('linkable', $model)
+            ->where('linkable_type', $model::class)
+            ->where('linkable_id', $model->getKey())
             ->delete();
     }
 
     private static function removeFieldTranslations(Model $model, string $field): void
     {
         UgcTranslation::query()
-            ->whereMorphedTo('linkable', $model)
+            ->where('linkable_type', $model::class)
+            ->where('linkable_id', $model->getKey())
             ->where('field', $field)
             ->delete();
     }
