@@ -26,7 +26,7 @@ class Modal extends Component
         'closeUgcModal'
     ];
 
-    public function mount()
+    public function mount(): void
     {
         $this->ugcModel = $this->model->ugcAll($this->field);
         $this->locked = (bool) $this->ugcModel?->locked ?? false;

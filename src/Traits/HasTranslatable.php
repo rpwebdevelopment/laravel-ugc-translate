@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace RpWebDevelopment\LaravelUgcTranslate\Traits;
 
-use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use RpWebDevelopment\LaravelUgcTranslate\Models\UgcTranslation;
 use RpWebDevelopment\LaravelUgcTranslate\Observers\UgcModelObserver;
+use RpWebDevelopment\LaravelUgcTranslate\Services\Locale;
 
 /**
  * @property-read array $ugcTranslatable
@@ -22,9 +23,10 @@ trait HasTranslatable
         }
     }
 
-    public function ugc(): MorphMany
+    public function ugc(): HasMany
     {
-        return $this->morphMany(UgcTranslation::class, 'linkable');
+        return $this->hasMany(UgcTranslation::class, 'linkable_id')
+            ->where('linkable_type', self::class);
     }
 
     public function ugcAll(string $field)
@@ -65,7 +67,10 @@ trait HasTranslatable
 
     public function getUgcLanguagesAttribute(): array
     {
-        return config('ugc-translate.translation-languages');
+        $locales = config('ugc-translate.translation-languages', []);
+        array_walk($locales, fn (&$item) => $item = Locale::getLocaleString($item));
+
+        return $locales;
     }
 
     public function getAttribute($field): mixed
@@ -74,6 +79,6 @@ trait HasTranslatable
             return parent::getAttribute($field);
         }
 
-        return $this->attributes[$field];
+        return $this->ugcField($field);
     }
 }
