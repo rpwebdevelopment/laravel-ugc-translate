@@ -17,7 +17,7 @@ class UgcTranslationRepository
 
         $record = new UgcTranslation(
             [
-                'linkable_type' => $model->getMorphClass(),
+                'linkable_type' => $model::class,
                 'linkable_id' => $model->getKey(),
                 'content' => json_encode($content),
                 'field' => $field,
