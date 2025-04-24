@@ -2,6 +2,17 @@
 
 All notable changes to `laravel-ugc-translate` will be documented in this file.
 
+## [0.3.0] - 2025-04-24
+
+Added optional AWS translate service, added code format handling and translation abstract
+
+### Added
+- [[FEATURE-ADDING-AWS-TRANSLATE]](https://github.com/rpwebdevelopment/laravel-ugc-translate/tree/feature-adding-aws-translate)
+
+### Changed
+
+### Fixed
+
 ## [0.2.5] - 2024-12-11
 
 Bugfix - fixed issue with saving updates for multiple langs
