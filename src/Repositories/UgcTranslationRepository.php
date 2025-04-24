@@ -7,6 +7,7 @@ namespace RpWebDevelopment\LaravelUgcTranslate\Repositories;
 use Illuminate\Database\Eloquent\Model;
 use RpWebDevelopment\LaravelUgcTranslate\Facades\UgcTranslate;
 use RpWebDevelopment\LaravelUgcTranslate\Models\UgcTranslation;
+use RpWebDevelopment\LaravelUgcTranslate\Services\Locale;
 
 class UgcTranslationRepository
 {
@@ -29,7 +30,7 @@ class UgcTranslationRepository
         foreach ($model->ugcLanguages as $lang) {
             $content[$lang] = UgcTranslate::translateText(
                 text: $model->getAttributeValue($field),
-                sourceLang: null,
+                sourceLang: Locale::getLocaleString(),
                 targetLang: $lang
             );
         }
