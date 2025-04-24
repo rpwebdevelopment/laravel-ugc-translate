@@ -1,5 +1,6 @@
 <?php
 
+use RpWebDevelopment\LaravelUgcTranslate\Services\Translate\AwsTranslate;
 use RpWebDevelopment\LaravelUgcTranslate\Services\Translate\DeepLTranslate;
 use RpWebDevelopment\LaravelUgcTranslate\Services\Translate\GoogleTranslate;
 
@@ -47,7 +48,7 @@ return [
     | This option indicates Translation service to be used for generating
     | translated strings.
     |
-    | Supported: "google", "deepl"
+    | Supported: "google", "deepl", "aws"
     |
     */
     'provider' => 'google',
@@ -68,6 +69,51 @@ return [
         'deepl' => [
             'service' => DeepLTranslate::class,
             'auth-token' => env('DEEPL_AUTH_TOKEN', ''),
-        ]
+            'settings' => [
+                /*
+                |--------------------------------------------------------------------------
+                | DeepL Model Type
+                |--------------------------------------------------------------------------
+                |
+                | @see https://developers.deepl.com/docs/api-reference/translate
+                |
+                | Supported: "quality_optimized", "prefer_quality_optimized",
+                | "latency_optimized"
+                */
+                'model_type' => 'prefer_quality_optimized',
+
+                /*
+                |--------------------------------------------------------------------------
+                | DeepL Formality
+                |--------------------------------------------------------------------------
+                |
+                | @see https://developers.deepl.com/docs/api-reference/translate
+                |
+                | Supported: "less", "more", "default", "prefer_less", "prefer_more"
+                */
+                'formality' => 'default',
+            ]
+        ],
+        'aws' => [
+            'service' => AwsTranslate::class,
+            'credentials' => [
+                'key' => env('AWS_ACCESS_KEY_ID'),
+                'secret' => env('AWS_SECRET_ACCESS_KEY'),
+            ],
+            'settings' => [
+                /*
+                |--------------------------------------------------------------------------
+                | AWS Formality
+                |--------------------------------------------------------------------------
+                |
+                | @see https://docs.aws.amazon.com/aws-sdk-php/v3/api/api-translate-2017-07-01.html#shape-translationsettings
+                |
+                | Supported: "FORMAL", "INFORMAL"
+                */
+                "Formality" => "FORMAL"
+            ],
+            "region" => env('AWS_DEFAULT_REGION', "us-east-1"),
+            "version" => "latest",
+        ],
     ],
 ];
