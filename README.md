@@ -23,13 +23,17 @@ php artisan vendor:publish --tag="ugc-translate-config"
 
 This package offers you the option of using the free-to-use, zero configuration 
 [Google Translate](https://github.com/Stichoza/google-translate-php) package from 
-[Stichoza](https://github.com/Stichoza) or the [DeepL API](https://github.com/DeepLcom/deepl-php).
+[Stichoza](https://github.com/Stichoza), or [DeepL API](https://github.com/DeepLcom/deepl-php), 
+or [Amazon Translate](https://aws.amazon.com/translate/).
  
-If leveraging the DeepL API you will need to add a valid `DEEPL_AUTH_TOKEN` to your `.env` file.
+If leveraging the DeepL API you will need to add a valid `DEEPL_AUTH_TOKEN` to your `.env`.
 
+If leveraging the Amazon Translate API you will need to ensure you have valid `AWS_ACCESS_KEY_ID`, 
+`AWS_SECRET_ACCESS_KEY` and `AWS_DEFAULT_REGION` values set in your `.env`.
 
 If you do not wish every record update/creation to trigger automatic translation, you can disable the observer by 
 adding the following to your `.env` file:
+
 ```php
 UGC_AUTO_TRANSLATE_DISABLED=true
 ```
