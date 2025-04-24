@@ -49,7 +49,7 @@ trait HasTranslatable
         return $content ?? $this->attributes[$field];
     }
 
-    public function ugcField(string $field): string
+    public function ugcField(string $field): ?string
     {
         $content = $this
             ->ugc()
